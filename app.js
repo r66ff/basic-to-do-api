@@ -71,14 +71,36 @@ app.use(cors({
   origin: ['http://localhost:3000']
 }))
 
-const index = require('./routes/index');
-app.use('/', index);
+// const index = require('./routes/index');
+// app.use('/', index);
 
 const taskRoutes = require('./routes/tasks')
 app.use('/api', taskRoutes);
 
 const authroutes = require('./routes/authroutes')
 app.use('/api', authroutes);
+
+app.use((req, res, next) => {
+  if (path.extname(req.path).length) {
+    const err = new Error('Not found');
+    err.status = 404;
+    next(err);
+  } else {
+    next();
+  }
+});
+
+// sends index.html
+app.use('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/index.html'));
+});
+
+// error handling endware
+app.use((err, req, res, next) => {
+  console.error(err);
+  console.error(err.stack);
+  res.status(err.status || 500).send(err.message || 'Internal server error.');
+});
 
 
 

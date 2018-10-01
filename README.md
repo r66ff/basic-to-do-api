@@ -2,32 +2,29 @@
 
 Very simple React / Express app
 
-## Getting Started
+## Installing
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
-### Prerequisites
-
-What things you need to install the software and how to install them
+Install and run Mongo db
 
 ```
-Give examples
+mongod --port 27018
+mongo --host 127.0.0.1:27018
 ```
 
-### Installing
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
+Run the app
 
 ```
-Give the example
+npm run dev
 ```
 
-And repeat
+## Functionality
 
-```
-until finished
-```
+User can:
 
-End with an example of getting some data out of the system or using it for a little demo
+* Sign up
+* Login
+* See all tasks
+* Create a task
+* Edit a task
+* Delete a task
+* Logout

@@ -17,6 +17,7 @@ export default class Routes extends Component {
     this.state = {
       error: null,
       isLoggedIn: false,
+      loc: history.location.pathname
     }
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -130,7 +131,6 @@ export default class Routes extends Component {
       history.push('/login');
     });
   }
-
 
   render() {
     const isLoggedIn = this.state.isLoggedIn;

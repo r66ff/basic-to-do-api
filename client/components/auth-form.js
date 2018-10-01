@@ -5,7 +5,7 @@ export class Auth extends Component {
 
   constructor(props) {
     super(props);
-console.log(props);
+
     this.handleSubmit = props.handleSubmit;
     this.name = props.name;
     this.displayName = props.displayName;

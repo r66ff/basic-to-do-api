@@ -127,7 +127,6 @@ __webpack_require__.r(__webpack_exports__);
 class Auth extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   constructor(props) {
     super(props);
-    console.log(props);
     this.handleSubmit = props.handleSubmit;
     this.name = props.name;
     this.displayName = props.displayName;
@@ -524,7 +523,8 @@ class Routes extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     super(props);
     this.state = {
       error: null,
-      isLoggedIn: false
+      isLoggedIn: false,
+      loc: _history__WEBPACK_IMPORTED_MODULE_5__["default"].location.pathname
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }

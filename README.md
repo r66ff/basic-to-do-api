@@ -10,6 +10,7 @@ Install and run Mongo db
 mongod --port 27018
 mongo --host 127.0.0.1:27018
 ```
+Rename `.env-example` to `.env` and adjust as needed
 
 Run the app
 

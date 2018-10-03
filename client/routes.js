@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Redirect } from 'react-router';
 import { Auth,
           Tasks,
           NewTask,
@@ -16,8 +15,7 @@ export default class Routes extends Component {
 
     this.state = {
       error: null,
-      isLoggedIn: false,
-      loc: history.location.pathname
+      isLoggedIn: false
     }
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -113,11 +111,9 @@ export default class Routes extends Component {
   }
 
   componentDidMount(){
-    console.log(history);
     const ref = this;
     axios.get('/api/loggedin')
     .then(function (response) {
-      console.log(response);
       ref.setState({
         isLoggedIn: true
       })
@@ -147,7 +143,6 @@ export default class Routes extends Component {
         <Route path="/signup" render={() => {
           return <Auth handleSubmit={this.handleSubmit} name="signup" displayName="Signup" error={this.state.error} />
         }} />
-        { console.log(isLoggedIn)}
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}

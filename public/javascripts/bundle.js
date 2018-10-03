@@ -507,12 +507,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
-/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/es/index.js");
-/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components */ "./client/components/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _history__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./history */ "./client/history.js");
-
+/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components */ "./client/components/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _history__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./history */ "./client/history.js");
 
 
 
@@ -523,8 +521,7 @@ class Routes extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     super(props);
     this.state = {
       error: null,
-      isLoggedIn: false,
-      loc: _history__WEBPACK_IMPORTED_MODULE_5__["default"].location.pathname
+      isLoggedIn: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -537,7 +534,7 @@ class Routes extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     if (formName === 'signup') {
       const email = evt.target.email.value;
       const password = evt.target.password.value;
-      axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('/api/signup', {
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('/api/signup', {
         username: email,
         password: password
       }).then(function (response) {
@@ -545,7 +542,7 @@ class Routes extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         ref.setState({
           isLoggedIn: true
         });
-        _history__WEBPACK_IMPORTED_MODULE_5__["default"].push('/tasks');
+        _history__WEBPACK_IMPORTED_MODULE_4__["default"].push('/tasks');
       }).catch(function (error) {
         console.log(error);
       });
@@ -554,7 +551,7 @@ class Routes extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     if (formName === 'login') {
       const email = evt.target.email.value;
       const password = evt.target.password.value;
-      axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('/api/login', {
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('/api/login', {
         username: email,
         password: password
       }).then(function (response) {
@@ -562,7 +559,7 @@ class Routes extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         ref.setState({
           isLoggedIn: true
         });
-        _history__WEBPACK_IMPORTED_MODULE_5__["default"].push('/tasks');
+        _history__WEBPACK_IMPORTED_MODULE_4__["default"].push('/tasks');
       }).catch(function (error) {
         console.log(error);
       });
@@ -571,13 +568,13 @@ class Routes extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     if (formName === 'new-task') {
       const title = evt.target.title.value;
       const description = evt.target.description.value;
-      axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('/api/tasks/create', {
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('/api/tasks/create', {
         title: title,
         description: description,
         doneyet: false
       }).then(function (response) {
         console.log(response);
-        _history__WEBPACK_IMPORTED_MODULE_5__["default"].push('/tasks');
+        _history__WEBPACK_IMPORTED_MODULE_4__["default"].push('/tasks');
       }).catch(function (error) {
         console.log(error);
       });
@@ -588,13 +585,13 @@ class Routes extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       const description = evt.target.description.value;
       const done = evt.target.done.checked;
       const id = evt.target.id.value;
-      axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('/api/tasks/edit/' + id, {
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('/api/tasks/edit/' + id, {
         title: title,
         description: description,
         doneyet: done
       }).then(function (response) {
         console.log(response);
-        _history__WEBPACK_IMPORTED_MODULE_5__["default"].push('/tasks');
+        _history__WEBPACK_IMPORTED_MODULE_4__["default"].push('/tasks');
       }).catch(function (error) {
         console.log(error);
       });
@@ -602,9 +599,9 @@ class Routes extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
     if (formName === 'delete-task') {
       const id = evt.target.id.value;
-      axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('/api/tasks/delete/' + id).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('/api/tasks/delete/' + id).then(function (response) {
         console.log(response);
-        _history__WEBPACK_IMPORTED_MODULE_5__["default"].push('/tasks');
+        _history__WEBPACK_IMPORTED_MODULE_4__["default"].push('/tasks');
       }).catch(function (error) {
         console.log(error);
       });
@@ -612,20 +609,18 @@ class Routes extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   }
 
   componentDidMount() {
-    console.log(_history__WEBPACK_IMPORTED_MODULE_5__["default"]);
     const ref = this;
-    axios__WEBPACK_IMPORTED_MODULE_4___default.a.get('/api/loggedin').then(function (response) {
-      console.log(response);
+    axios__WEBPACK_IMPORTED_MODULE_3___default.a.get('/api/loggedin').then(function (response) {
       ref.setState({
         isLoggedIn: true
       });
-      _history__WEBPACK_IMPORTED_MODULE_5__["default"].push('/tasks');
+      _history__WEBPACK_IMPORTED_MODULE_4__["default"].push('/tasks');
     }).catch(function (error) {
       console.log(error);
       ref.setState({
         isLoggedIn: false
       });
-      _history__WEBPACK_IMPORTED_MODULE_5__["default"].push('/login');
+      _history__WEBPACK_IMPORTED_MODULE_4__["default"].push('/login');
     });
   }
 
@@ -635,7 +630,7 @@ class Routes extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       exact: true,
       path: "/",
       render: () => {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_3__["Auth"], {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["Auth"], {
           handleSubmit: this.handleSubmit,
           name: "login",
           displayName: "Login",
@@ -645,7 +640,7 @@ class Routes extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
       path: "/login",
       render: () => {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_3__["Auth"], {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["Auth"], {
           handleSubmit: this.handleSubmit,
           name: "login",
           displayName: "Login",
@@ -655,23 +650,23 @@ class Routes extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
       path: "/signup",
       render: () => {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_3__["Auth"], {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["Auth"], {
           handleSubmit: this.handleSubmit,
           name: "signup",
           displayName: "Signup",
           error: this.state.error
         });
       }
-    }), console.log(isLoggedIn), isLoggedIn && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    }), isLoggedIn && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
       exact: true,
       path: "/tasks",
       render: () => {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_3__["Tasks"], null);
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["Tasks"], null);
       }
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
       path: "/add-task",
       render: () => {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_3__["NewTask"], {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["NewTask"], {
           handleSubmit: this.handleSubmit,
           name: "new-task",
           displayName: "Add Task"
@@ -680,7 +675,7 @@ class Routes extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
       path: "/edit-task/:id",
       render: data => {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_3__["EditTask"], {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["EditTask"], {
           handleSubmit: this.handleSubmit,
           name: "edit-task",
           displayName: "Edit Task",
@@ -690,7 +685,7 @@ class Routes extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
       path: "/delete-task/:id",
       render: data => {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_3__["DeleteTask"], {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["DeleteTask"], {
           handleSubmit: this.handleSubmit,
           name: "delete-task",
           displayName: "Delete Task",
@@ -699,7 +694,7 @@ class Routes extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       }
     })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
       render: () => {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_3__["Auth"], {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components__WEBPACK_IMPORTED_MODULE_2__["Auth"], {
           handleSubmit: this.handleSubmit,
           name: "login",
           displayName: "Login",
@@ -33869,68 +33864,6 @@ var generatePath = function generatePath() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (generatePath);
-
-/***/ }),
-
-/***/ "./node_modules/react-router/es/index.js":
-/*!***********************************************!*\
-  !*** ./node_modules/react-router/es/index.js ***!
-  \***********************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _MemoryRouter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MemoryRouter */ "./node_modules/react-router/es/MemoryRouter.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "MemoryRouter", function() { return _MemoryRouter__WEBPACK_IMPORTED_MODULE_0__["default"]; });
-
-/* harmony import */ var _Prompt__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Prompt */ "./node_modules/react-router/es/Prompt.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Prompt", function() { return _Prompt__WEBPACK_IMPORTED_MODULE_1__["default"]; });
-
-/* harmony import */ var _Redirect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Redirect */ "./node_modules/react-router/es/Redirect.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Redirect", function() { return _Redirect__WEBPACK_IMPORTED_MODULE_2__["default"]; });
-
-/* harmony import */ var _Route__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Route */ "./node_modules/react-router/es/Route.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Route", function() { return _Route__WEBPACK_IMPORTED_MODULE_3__["default"]; });
-
-/* harmony import */ var _Router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Router */ "./node_modules/react-router/es/Router.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Router", function() { return _Router__WEBPACK_IMPORTED_MODULE_4__["default"]; });
-
-/* harmony import */ var _StaticRouter__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./StaticRouter */ "./node_modules/react-router/es/StaticRouter.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "StaticRouter", function() { return _StaticRouter__WEBPACK_IMPORTED_MODULE_5__["default"]; });
-
-/* harmony import */ var _Switch__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Switch */ "./node_modules/react-router/es/Switch.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Switch", function() { return _Switch__WEBPACK_IMPORTED_MODULE_6__["default"]; });
-
-/* harmony import */ var _generatePath__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./generatePath */ "./node_modules/react-router/es/generatePath.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "generatePath", function() { return _generatePath__WEBPACK_IMPORTED_MODULE_7__["default"]; });
-
-/* harmony import */ var _matchPath__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./matchPath */ "./node_modules/react-router/es/matchPath.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "matchPath", function() { return _matchPath__WEBPACK_IMPORTED_MODULE_8__["default"]; });
-
-/* harmony import */ var _withRouter__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./withRouter */ "./node_modules/react-router/es/withRouter.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "withRouter", function() { return _withRouter__WEBPACK_IMPORTED_MODULE_9__["default"]; });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /***/ }),
 
